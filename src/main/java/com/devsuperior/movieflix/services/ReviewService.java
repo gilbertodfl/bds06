@@ -13,11 +13,11 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.devsuperior.movieflix.dto.MovieDTO;
 import com.devsuperior.movieflix.dto.ReviewDTO;
 import com.devsuperior.movieflix.entities.Movie;
 import com.devsuperior.movieflix.entities.Review;
 import com.devsuperior.movieflix.entities.User;
+import com.devsuperior.movieflix.repositories.MovieRepository;
 import com.devsuperior.movieflix.repositories.ReviewRepository;
 import com.devsuperior.movieflix.services.exceptions.DatabaseException;
 import com.devsuperior.movieflix.services.exceptions.ResourceNotFoundException;
@@ -27,7 +27,10 @@ public class ReviewService {
 	// Já instância : org.springframework.beans.factory.annotation.Autowired;
 	@Autowired
 	private ReviewRepository repository;
-	
+
+	@Autowired
+	private MovieRepository movieRepository;
+
 	@Autowired
 	private AuthService authService;
 
@@ -38,15 +41,7 @@ public class ReviewService {
 		return list.stream().map( x -> new ReviewDTO(x)).collect(Collectors.toList());
 	}
 		
-/*
- *  Embora paginado seja melhor, o exercício pede que seja uma lista simples.
- *  	
-	@Transactional(readOnly = true)
-	public Page<ReviewDTO> findAllPaged(Pageable pageable) {
-		Page<Review> page = repository.findAll(pageable);
-		return page.map(x -> new ReviewDTO(x)); 
-	}
-*/
+
 	@Transactional(readOnly = true)
 	public ReviewDTO findById(Long id) {
 		Optional<Review> obj = repository.findById(id);
@@ -55,15 +50,24 @@ public class ReviewService {
 	}
 	@Transactional
 	public ReviewDTO insert(ReviewDTO dto) {
-		Movie movie1;
+
+		Movie movie1  = new Movie();
 		Review entity = new Review();
 		User user = authService.authenticated();
+
 		entity.setUser ( user)  ;
-		/// preenche movie
-		movie1  = new Movie();
-		movie1.setId   ( dto.getMovieId());
-		movie1.setTitle( dto.getText());
+
+//		System.out.println( " id eh entity.  " + entity.getUser().getId() );
+//		System.out.println( " email eh  entity. "  + entity.getUser().getEmail() );
+
+
+		movie1 = movieRepository.getOne( dto.getMovieId() );
 		entity.setMovie( movie1 );
+
+//		System.out.println( " id movie entity.  " + entity.getMovie().getId() );
+//		System.out.println( " email eh  entity. "  + entity.getMovie().getTitle() );
+
+		// aqui vai a descrição do Review do filme
 		entity.setText (dto.getText());
 		
 		entity = repository.save(entity);

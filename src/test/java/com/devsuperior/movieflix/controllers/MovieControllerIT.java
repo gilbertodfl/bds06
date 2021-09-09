@@ -74,9 +74,9 @@ public class MovieControllerIT {
 		result.andExpect(jsonPath("$.year").isNotEmpty());
 		result.andExpect(jsonPath("$.imgUrl").isNotEmpty());
 		result.andExpect(jsonPath("$.synopsis").isNotEmpty());
-	// não faz sentido: 	result.andExpect(jsonPath("$.genre").isNotEmpty());
-		result.andExpect(jsonPath("$.genre.id").isNotEmpty());
-		result.andExpect(jsonPath("$.genre.name").isNotEmpty());
+	 	result.andExpect(jsonPath("$.genres").isNotEmpty());
+		result.andExpect(jsonPath("$.genres.id").isNotEmpty());
+		result.andExpect(jsonPath("$.genres.name").isNotEmpty());
 	}
 
 	@Test
@@ -96,9 +96,9 @@ public class MovieControllerIT {
 		result.andExpect(jsonPath("$.year").isNotEmpty());
 		result.andExpect(jsonPath("$.imgUrl").isNotEmpty());
 		result.andExpect(jsonPath("$.synopsis").isNotEmpty());
-//		result.andExpect(jsonPath("$.genre").isNotEmpty());
-//		result.andExpect(jsonPath("$.genre.id").isNotEmpty());
-//		result.andExpect(jsonPath("$.genre.name").isNotEmpty());
+		result.andExpect(jsonPath("$.genres").isNotEmpty());
+		result.andExpect(jsonPath("$.genres.id").isNotEmpty());
+		result.andExpect(jsonPath("$.genres.name").isNotEmpty());
 	}
 
 	@Test

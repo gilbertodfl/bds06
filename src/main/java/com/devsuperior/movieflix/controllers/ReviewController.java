@@ -36,15 +36,6 @@ public class ReviewController {
 			return ResponseEntity.ok().body(list);
 		}
 		
-/*		
- * Embora paginado seja melhor, o exercício pede que seja uma lista simples. 
-		@GetMapping
-		public ResponseEntity<Page<ReviewDTO>> findAll(Pageable pageable) {
-			PageRequest pageRequest = PageRequest.of( pageable.getPageNumber(), pageable.getPageSize() , Sort.by("name") );
-			Page<ReviewDTO> list = service.findAllPaged(pageRequest);
-			return ResponseEntity.ok().body(list); 
-		}
-*/		
 		@GetMapping(value = "/{id}")
 		public ResponseEntity<ReviewDTO> findById(@PathVariable Long id) {
 			ReviewDTO dto = service.findById(id);
@@ -53,6 +44,7 @@ public class ReviewController {
 		
 		@PostMapping
 		public ResponseEntity<ReviewDTO> insert(@Valid @RequestBody ReviewDTO dto) {
+
 			// o parametro @Valid é o que ativa as validações. Sem ele nada do que foi construído será executado. 
 			dto = service.insert(dto);
 			URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")

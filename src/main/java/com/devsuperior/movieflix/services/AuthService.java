@@ -25,7 +25,7 @@ public class AuthService {
 		try {
 			// a chamada abaixo pega o usuário que já foi reconhecido pelo spring-secutiry
 			String username = SecurityContextHolder.getContext().getAuthentication().getName();
-			logger.info("Autenticado ---->  " + username);
+//			logger.info("Autenticado ---->  " + username);
 			return userRepository.findByEmail(username);
 		}
 		catch (Exception e) {

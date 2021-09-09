@@ -12,5 +12,5 @@ import com.devsuperior.movieflix.entities.Genre;
 public interface GenreRepository extends JpaRepository <Genre, Long>{
 
 	Genre findByName(String genre);
-		
+//	Genre findById2(Long id);
 }

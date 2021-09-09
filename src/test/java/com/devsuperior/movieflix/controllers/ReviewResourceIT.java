@@ -51,7 +51,7 @@ public class ReviewResourceIT {
 
 		ReviewDTO reviewDTO = new ReviewDTO();
 		reviewDTO.setText("Gostei do filme!");
-// como estava antes: 		reviewDTO.setMovieId(1L);
+        reviewDTO.setMovieId(1L);
 		reviewDTO.setId(1L);
 
 		String jsonBody = objectMapper.writeValueAsString(reviewDTO);
@@ -72,7 +72,7 @@ public class ReviewResourceIT {
 		
 		ReviewDTO reviewDTO = new ReviewDTO();
 		reviewDTO.setText("Gostei do filme!");
-//		reviewDTO.setMovieId(1L);
+		reviewDTO.setMovieId(1L);
 		reviewDTO.setId(1L);
 
 		String jsonBody = objectMapper.writeValueAsString(reviewDTO);
@@ -97,8 +97,7 @@ public class ReviewResourceIT {
 		
 		ReviewDTO reviewDTO = new ReviewDTO();
 		reviewDTO.setText(reviewText);
-//		reviewDTO.setMovieId(movieId);
-		reviewDTO.setId(movieId);
+		reviewDTO.setMovieId(movieId);
 
 		String jsonBody = objectMapper.writeValueAsString(reviewDTO);
 		
@@ -119,16 +118,17 @@ public class ReviewResourceIT {
 		result.andExpect(jsonPath("$.user.id").isNotEmpty());
 		result.andExpect(jsonPath("$.user.name").isNotEmpty());
 		result.andExpect(jsonPath("$.user.email").value(memberUsername));
-	}
+		
 
+	}
 	@Test
 	public void insertShouldReturnUnproccessableEntityWhenMemberAuthenticatedAndInvalidData() throws Exception {
 		
 		String accessToken = tokenUtil.obtainAccessToken(mockMvc, memberUsername, memberPassword);
 		
 		ReviewDTO reviewDTO = new ReviewDTO();
-		reviewDTO.setText("        ");
-//		reviewDTO.setMovieId(1L);
+		reviewDTO.setText("       ");
+		reviewDTO.setMovieId(1L);
 		reviewDTO.setId(1L);
 
 		String jsonBody = objectMapper.writeValueAsString(reviewDTO);

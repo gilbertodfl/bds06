@@ -30,13 +30,14 @@ public class MovieDTO implements Serializable {
 	private String synopsis;
 	
 //	@NotNull(message = "Campo requerido")
-	private Long genreId;
+//	private Long genreId;
 		
 	// outra maneira com repetição: 
     // private List<GenreDTO> genres = new ArrayList<>();
 
 	// Sem repetição: SET 
-	Set <GenreDTO> genres = new HashSet<>();
+//	Set <GenreDTO> genres = new HashSet<>();
+	GenreDTO genres ;
 	
 	public MovieDTO() {
 	}
@@ -60,15 +61,16 @@ public class MovieDTO implements Serializable {
 		year = entity.getYear();
 		imgUrl = entity.getImgUrl();
 		synopsis = entity.getSynopsis();
-		genres.add(new GenreDTO(entity.getGenre()));
+		genres = new GenreDTO(entity.getGenre()); 
+//		genres.add(new GenreDTO(entity.getGenre()));
 
 	}
-	
+/*	
 	public MovieDTO(Movie entity, Set<Genre> genres) {
 		this(entity);
 		genres.forEach(genre -> this.genres.add(new GenreDTO(genre)));
 	}
-
+*/
 	
 /*
 	public MovieDTO( MovieByGenreProjection projection) {
@@ -141,22 +143,15 @@ public class MovieDTO implements Serializable {
 	}
 
 	
-	public Long getGenreId() {
-		return genreId;
-	}
+	
 
 
-	public void setGenreId(Long genreId) {
-		this.genreId = genreId;
-	}
-
-
-	public Set<GenreDTO> getGenres() {
+	public GenreDTO getGenres() {
 		return genres;
 	}
 
 
-	public void setGenres(Set<GenreDTO> genres) {
+	public void setGenres(GenreDTO genres) {
 		this.genres = genres;
 	}
 

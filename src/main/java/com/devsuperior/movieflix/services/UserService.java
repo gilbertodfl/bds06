@@ -55,7 +55,7 @@ public class UserService implements UserDetailsService{
 			logger.error(" UserService.java ==> loadUserByUsername > User found: " + username);
 			throw new UsernameNotFoundException("Email not found");
 		}
-		logger.info(" UserService.java ==> loadUserByUsername > User found: " + username);
+//		logger.info(" UserService.java ==> loadUserByUsername > User found: " + username);
 		return user;
 	}
 	

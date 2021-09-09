@@ -35,6 +35,12 @@ public class ReviewUserDTO implements Serializable {
 		email = entity.getEmail();
 	}
 
+	public ReviewUserDTO(ReviewUserDTO dto ,User entity) {
+		dto.setId(entity.getId());
+		dto.setName(entity.getName());
+		dto.setEmail(entity.getEmail());
+	}
+
 	public Long getId() {
 		return id;
 	}

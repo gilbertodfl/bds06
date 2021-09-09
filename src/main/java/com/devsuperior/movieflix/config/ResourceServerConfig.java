@@ -29,9 +29,10 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 	private JwtTokenStore tokenStore;
 
 	private static final String[] PUBLIC = { "/oauth/token", "/h2-console/**" };
-	private static final String[] GETS_PUBLIC = {   "/genres22/**"};
-	private static final String[] PROFILE = {  "/users/**" , "/reviews/**" , "/movies/**" ,"/genres/**"  };
-
+	private static final String[] GETS_PUBLIC = {   "/xgenres22/**"};
+	private static final String[] USER_AUTHENTICATED = {  "/users/**"  , "/movies/**" ,"/genres/**"  };
+	private static final String[] ONLY_MEMBERS = {"/reviews/**"  };
+	
 	@Override
 	public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
 		logger.info("Passei no ResourceServerConfig.java ==> configure : ResourceServerSecurityConfigurer " );
@@ -51,7 +52,8 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 		http.authorizeRequests()
 		.antMatchers(PUBLIC).permitAll()
 		.antMatchers(HttpMethod.GET, GETS_PUBLIC).permitAll()
-		.antMatchers(PROFILE).hasAnyRole("MEMBER", "ADMIN","VISITOR")
+		.antMatchers(ONLY_MEMBERS).hasAnyRole("MEMBER", "ADMIN")
+		.antMatchers(USER_AUTHENTICATED).hasAnyRole("MEMBER", "ADMIN","VISITOR")
 		.anyRequest().authenticated();
 	}	
 }

@@ -47,6 +47,9 @@ public class MovieService {
 	@Autowired
 	private ReviewRepository repositoryReview;
 	
+	@Autowired
+	private GenreRepository repositoryGenre;
+	
 	public User user;
 
 	@Transactional(readOnly = true)
@@ -97,7 +100,10 @@ public class MovieService {
 		entity.setImgUrl   ( dto.getImgUrl()	);
 		entity.setSynopsis ( dto.getSynopsis()	);
 		entity.setYear     ( dto.getYear()		);
-		entity.setGenre ( new Genre ( dto.getGenreId(), null ));
+//		dto.getGenres().getId();
+		Genre entityGenre = repositoryGenre.getOne(dto.getGenres().getId());
+		entity.setGenre ( new Genre ( entityGenre ));
+//		entity.setGenre ( new Genre ( dto.getGenreId(), null ));
 
 	}
 
