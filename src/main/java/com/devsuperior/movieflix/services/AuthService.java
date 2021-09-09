@@ -38,6 +38,7 @@ public class AuthService {
 		logger.info("Usuario id " + userId);
 		User user = authenticated();
 		logger.warn("AuthService -> validateSelfOrAdmin  " + user.getName()) ;
+		
 //		if (!user.getId().equals(userId) && ( ! user.hasHole("ROLE_MEMBER") || ! user.hasHole("ROLE_VISITOR") )) {
 /*		if (!user.getId().equals(userId) ) {
 			logger.info("Usuario sem permissão ---->  " + user);
