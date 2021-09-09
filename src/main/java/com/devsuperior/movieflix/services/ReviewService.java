@@ -57,10 +57,6 @@ public class ReviewService {
 
 		entity.setUser ( user)  ;
 
-//		System.out.println( " id eh entity.  " + entity.getUser().getId() );
-//		System.out.println( " email eh  entity. "  + entity.getUser().getEmail() );
-
-
 		movie1 = movieRepository.getOne( dto.getMovieId() );
 		entity.setMovie( movie1 );
 

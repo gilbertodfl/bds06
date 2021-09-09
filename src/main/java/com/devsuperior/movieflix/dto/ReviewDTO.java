@@ -38,11 +38,11 @@ public class ReviewDTO implements Serializable {
 		System.out.println( "........ name eh  entity. "  + user1.getName() );
 */
 		this.user = user1;
-
 		
 	}
 
 	public ReviewDTO(Review entity , User user )	{
+		//super();
 		id = entity.getId();
 		text = entity.getText();
 		movieId = entity.getMovie().getId();
